@@ -7,7 +7,7 @@ This extension provides instant svg sprite support to your Mix (v2.1 and up) bui
 First, install the extension.
 
 ```
-npm install laravel-mix-svg-sprite
+npm install @ayctor/laravel-mix-sprite-svg --save-dev
 ```
 
 Then, require it within your `webpack.mix.js` file, like so:
