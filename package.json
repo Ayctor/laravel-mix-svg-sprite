@@ -1,6 +1,6 @@
 {
-  "name": "@ayctor/laravel-mix-sprite-svg",
-  "version": "0.1.1",
+  "name": "@ayctor/laravel-mix-svg-sprite",
+  "version": "0.1.0",
   "description": "A quick Laravel Mix extension for svg sprite support.",
   "main": "index.js",
   "scripts": {
