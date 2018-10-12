@@ -22,7 +22,7 @@ class SvgSprite {
      * @return {Array}
      */
     dependencies() {
-        return ['svg-spritemap-webpack-plugin'];
+        return ['svg-spritemap-webpack-plugin@^1.0.0'];
     }
 
     /**
