@@ -3,16 +3,24 @@ let mix = require('laravel-mix');
 class SvgSprite {
 
     constructor() {
+        this.entries = 'resources/svg/*.svg';
         this.options = {
-            src: '**/*.svg',
-            glob: {},
-            svgo: {},
-            svg4everybody: false,
-            gutter: 2,
-            prefix: 'sprite-',
-            filename: 'spritemap.svg',
-            chunk: 'spritemap',
-            deleteChunk: true
+            output:  {
+                filename: 'svg/sprite.svg',
+                chunk: {
+                    name: '/svg/sprite',
+                    keep: true
+                },
+                svgo: {
+                    plugins: [{
+                        removeEmptyAttrs: true,
+                        convertStyleToAttrs: true,
+                    }],
+                }
+            },
+            sprite: {
+                prefix: false,
+            }
         };
     }
 
@@ -22,7 +30,7 @@ class SvgSprite {
      * @return {Array}
      */
     dependencies() {
-        return ['svg-spritemap-webpack-plugin@^1.0.0'];
+        return ['svg-spritemap-webpack-plugin'];
     }
 
     /**
@@ -31,16 +39,13 @@ class SvgSprite {
      * @param {string} entry
      * @param {string} output
      */
-    register(entry, output = false) {
-        if (typeof entry == 'string') {
-            this.options.src = entry;
-            this.options.filename = output;
-            return;
+    register(entries = false, options = false) {
+        if (typeof entries != 'boolean') {
+            this.entries = entries;
         }
 
-        if (typeof entry == 'object') {
-            Object.assign(this.options, entry);
-            return;
+        if (typeof options == 'object') {
+            Object.assign(this.options, options);
         }
     }
 
@@ -52,7 +57,7 @@ class SvgSprite {
     webpackPlugins() {
         let SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 
-        return new SVGSpritemapPlugin(this.options);
+        return new SVGSpritemapPlugin(this.entries, this.options);
     }
 }
 
