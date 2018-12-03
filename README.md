@@ -1,6 +1,6 @@
 # Laravel mix svg sprite
 
-This extension provides instant svg sprite support to your Mix (v2.1 and up) builds.
+This extension provides instant svg sprite support to your Mix (v4 and up) builds.
 
 ## Usage
 
@@ -17,14 +17,24 @@ let mix = require('laravel-mix');
 
 require('@ayctor/laravel-mix-svg-sprite');
 
-// Low config
-mix.svgSprite('**/*.svg', 'sprite.svg');
-
-// Or customizable
-mix.svgSprite({
-    src: '**/*.svg',
-    filename: 'sprite.svg',
-    prefix: ''
+// customizable config
+mix.svgSprite('resources/svg/*.svg', {
+    output:  {
+        filename: 'svg/sprite.svg',
+        chunk: {
+            name: '/svg/sprite',
+            keep: true
+        },
+        svgo: {
+            plugins: [{
+                removeEmptyAttrs: true,
+                convertStyleToAttrs: true,
+            }],
+        }
+    },
+    sprite: {
+        prefix: false,
+    }
 });
 ```
 
